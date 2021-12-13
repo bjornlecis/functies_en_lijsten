@@ -1,5 +1,5 @@
 """"
-In dit programma passen we diverse functies uit op een lijst.
+In dit programma passen we diverse functies toe op een lijst.
 De gebruiker geeft een invoer welke functie hij wil aanroepen
 indien de gebruiker stop invoert stop het programma
 """
