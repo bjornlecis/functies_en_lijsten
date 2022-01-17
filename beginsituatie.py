@@ -3,6 +3,7 @@ In dit programma passen we diverse functies toe op een lijst.
 De gebruiker geeft een invoer welke functie hij wil aanroepen
 indien de gebruiker stop invoert stop het programma
 """
+log = open("logboek.txt","w")
 #deze functie drukt de mogelijkheden af
 def print_mogelijke_functies():
     print("je kan kiezen uit")
@@ -12,6 +13,7 @@ def print_mogelijke_functies():
     print("4: verwijder naam uit de lijst")
     print("5: sorteer de lijst van A-Z")
     print("6: vervang naam in lijst")
+    print("7: lees logboek")
 
 #deze functie geeft de lijst van de namen
 def print_lijst(lijst):
@@ -32,15 +34,21 @@ def voeg_toe(lijst):
                 bevestig = input("Ben je zeker dat je "+naam+" wilt toevoegen j/n?")
                 if(bevestig == "j"):
                     lijst.append(naam)
+                    log = open("logboek.txt","a")
+                    log.writelines(naam," Is toegevoegd"+"\n")
+                    log.close()
             else:
                 print(naam,"is reeds in lijst")
             naam = input("geef de naam van de persoon")
     else:
-        na2am = input("geef de naam van de persoon")
+        naam = input("geef de naam van de persoon")
         if not naam in lijst:
             bevestig = input("Ben je zeker dat je "+naam+" wilt toevoegen j/n?")
             if(bevestig == "j"):
                 lijst.append(naam)
+                log = open("logboek.txt","a")
+                log.writelines(naam+" Is toegevoegd"+"\n")
+                log.close()
         else:
             print(naam,"is reeds in lijst")
     return lijst
@@ -62,6 +70,9 @@ def verwijder_naam(lijst):
         if(bevestig == "j"):
             lijst.remove(naam)
             print(naam," is weg uit de lijst")
+            log = open("logboek.txt","a")
+            log.writelines(naam+" Is verwijderd uit de lijst"+"\n")
+            log.close()
     else:
         print(naam, "is niet in de lijst")
 #Lijst van A-Z
@@ -82,6 +93,11 @@ def vervang_in_naam_lijst(lijst):
     else:
         print("naam staat niet in de lijst")
 
+def lees_logboek():
+    log = open("logboek.txt","r")
+    print("-------------------Logboek--------------"+"\n")
+    print(log.read())
+    log.close()
 
 
 #lijst met namen(hardcoded)
@@ -104,6 +120,8 @@ while(not invoer == "stop"):
         sorteer_lijst(namen)
     elif(invoer == "6"):
         vervang_in_naam_lijst(namen)
+    elif(invoer == "7"):
+        lees_logboek()
 
     print_mogelijke_functies()
     invoer = input("Wat wil je doen? geed het nummer in of stop om te stoppen")
